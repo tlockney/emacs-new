@@ -21,6 +21,7 @@
 ** This is largely borrowed from Howard Abrams’ Emacs config.
 
 #+begin_src emacs-lisp
+(if window-system
   (defface org-block-begin-line
     '((t (:underline "#A7A6AA" :foreground "#008ED1" :background "#002E41")))
     "Face used for the line delimiting the begin of source blocks.")
@@ -59,7 +60,7 @@
                              `(org-level-3 ((t (,@headline ,@sans-font :height 1.25))))
                              `(org-level-2 ((t (,@headline ,@sans-font :height 1.5))))
                              `(org-level-1 ((t (,@headline ,@sans-font :height 1.75))))
-                             `(org-document-title ((t (,@headline ,@sans-font :height 1.5 :underline nil))))))
+                             `(org-document-title ((t (,@headline ,@sans-font :height 1.5 :underline nil)))))))
 #+end_src
 
 ** Clean up the elipsis.
