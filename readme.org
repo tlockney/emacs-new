@@ -3,25 +3,7 @@
 #+EMAIL: thomas@lockney.net
 
 #+begin_src emacs-lisp
-  (require 'midnight)
-#+end_src
-
-* General Config
-** Set some basic shortcuts
-#+begin_src emacs-lisp
-(defalias 'tf 'toggle-frame-fullscreen)
-(defalias 'tff 'toggle-frame-fullscreen)
-#+end_src
-** Make sure important bits are in our path
-#+begin_src emacs-lisp
-(setq exec-path (append exec-path '("/usr/local/bin")))
-#+end_src
-
-* Make org-mode a bit better
-** This is largely borrowed from Howard Abrams’ Emacs config.
-
-#+begin_src emacs-lisp
-(if window-system
+(when (display-graphic-p)
   (defface org-block-begin-line
     '((t (:underline "#A7A6AA" :foreground "#008ED1" :background "#002E41")))
     "Face used for the line delimiting the begin of source blocks.")
