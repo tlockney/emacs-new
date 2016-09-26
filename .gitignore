@@ -1,0 +1,9 @@
+elpa/
+url/
+custom.el
+bookmarks
+*~
+readme.el
+projectile-bookmarks.eld
+ido.last
+.emacs-desktop
