@@ -7,15 +7,22 @@
 (fset `yes-or-no-p `y-or-n-p)
 (transient-mark-mode t)
 (column-number-mode t)
-(setq major-mode 'text-mode
-      inhibit-splash-screen t
-      inhibit-startup-message t
-      inhibit-startup-echo-area-message t
-      initial-scratch-message nil
-      initial-major-mode 'org-mode
-      confirm-nonexistent-file-or-buffer nil
-      kill-buffer-query-functions (remq 'process-kill-buffer-query-function
-                                        kill-buffer-query-functions))
+(setq
+ major-mode 'text-mode
+ inhibit-splash-screen t
+ inhibit-startup-message t
+ inhibit-startup-screen t
+ inhibit-startup-echo-area-message t
+ initial-scratch-message nil
+ initial-major-mode 'org-mode
+ confirm-nonexistent-file-or-buffer nil
+ delete-old-version -1
+ version-control t
+ vc-make-backup-files t
+ backup-directory-alist `((".*" . "~/.emacs.d/backups"))
+ vc-follow-symlinks t
+ kill-buffer-query-functions (remq 'process-kill-buffer-query-function
+				   kill-buffer-query-functions))
 (tooltip-mode -1)
 
 ;; make sure everything is where I left it

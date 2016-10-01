@@ -1,12 +1,9 @@
 #+TITLE: Emacs Configuration
 #+AUTHOR: Thomas Lockney
 #+EMAIL: thomas@lockney.net
-
-
 #+begin_src emacs-lisp
   (require 'midnight)
 #+end_src
-
 * General Config
 ** Set some basic shortcuts
 #+begin_src emacs-lisp
@@ -17,10 +14,8 @@
 #+begin_src emacs-lisp
 (setq exec-path (append exec-path '("/usr/local/bin")))
 #+end_src
-
 * Make org-mode a bit better
 ** This is largely borrowed from Howard Abrams’ Emacs config.
-
 #+begin_src emacs-lisp
 (when (display-graphic-p)
   (defface org-block-begin-line
@@ -63,15 +58,11 @@
                              `(org-level-1 ((t (,@headline ,@sans-font :height 1.75))))
                              `(org-document-title ((t (,@headline ,@sans-font :height 1.5 :underline nil)))))))
 #+end_src
-
 ** Clean up the elipsis.
-
 #+begin_src emacs-lisp
 (setq org-ellipsis " ⤵")
 #+end_src
-
 ** And install org-bullets for a nicer appearance.
-
 #+begin_src emacs-lisp
 (use-package org-bullets
   :ensure t
@@ -79,30 +70,22 @@
   :init
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
 #+end_src
-
-** Set up file/folder locations
-
+** Setup file/folder locations
 #+begin_src emacs-lisp
   (setq org-directory "~/Dropbox/org"
         org-default-notes-file (concat org-directory "/notes.org")
         org-agenda-files `(,org-directory))
 #+end_src
-b
 ** IDO completions for org-mode
-
 #+begin_src emacs-lisp
   (setq org-completion-use-ido t)
 #+end_src
-
 ** Org-mouse support
-
 #+begin_src emacs-lisp
   (if window-system
       (require 'org-mouse))
 #+end_src
-
 ** Org-capture config
-
 #+begin_src emacs-lisp
   (require 'org-capture)
   (setq org-capture-templates
@@ -127,7 +110,6 @@ b
 
 (load-file "~/.emacs.d/alfred-org-capture.el")
 #+end_src
-   
 * Coding setup
 ** Scala
 Load ENSIME ftw!
@@ -138,7 +120,6 @@ Load ENSIME ftw!
   (add-hook 'scala-mode-hook 'ensime-mode))
 (setq exec-path (append exec-path '("/usr/local/bin")))
 #+end_src
-
 ** Rust
 #+begin_src emacs-lisp
 (use-package cargo)
@@ -158,8 +139,6 @@ Load ENSIME ftw!
   :init
   (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))
 #+end_src
-
-
 ** OCaml/Reason
 #+begin_src emacs-lisp
 ;; Add opam emacs directory to the load-path
@@ -170,11 +149,9 @@ Load ENSIME ftw!
 ;; Start merlin on ocaml files
 (add-hook 'tuareg-mode-hook 'merlin-mode t)
 (add-hook 'caml-mode-hook 'merlin-mode t)
-#+end_src
-
+#+end_src   
 * Miscellaneous
 ** Install writeroom-mode
-
 #+begin_src emacs-lisp
 (use-package writeroom-mode
   :ensure t)
@@ -217,4 +194,17 @@ Load ENSIME ftw!
 (global-set-key (kbd "C-c b") 'switch-to-scratch-and-back)
 
 #+end_src
+** Make killing buffers simpler
+#+begin_src emacs-lisp
+(defun tl-kill-a-buffer (askp)
+  (interactive "P")
+  (if askp
+      (kill-buffer (completing-read
+                            "Kill buffer: "
+                            (mapcar #'buffer-name (buffer-list))))
+    (kill-this-buffer)))
+
+(global-set-key (kbd "C-x k") 'tl-kill-a-buffer)
+#+end_src
+
 
