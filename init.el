@@ -1,9 +1,6 @@
 ;; clean & simple UI
 
-(tool-bar-mode 0) 
-(menu-bar-mode 0)
-(toggle-frame-fullscreen) 
-(scroll-bar-mode 0)
+;; (toggle-frame-fullscreen) 
 (fset `yes-or-no-p `y-or-n-p)
 (transient-mark-mode t)
 (column-number-mode t)
@@ -62,12 +59,20 @@
 ;; load use-package for loading other packages more easily
 (require 'use-package)
 
+(use-package better-defaults
+  :ensure t)
+
 ;; load a reasonable theme
 
-(use-package solarized-theme
+;; (use-package solarized-theme
+;;   :ensure t
+;;   :config
+;;   (progn (load-theme 'solarized-dark t)))
+
+(use-package material-theme
   :ensure t
   :config
-  (progn (load-theme 'solarized-dark t)))
+  (progn (load-theme 'material t)))
 
 ;; set up a few basic bits and pieces
 
